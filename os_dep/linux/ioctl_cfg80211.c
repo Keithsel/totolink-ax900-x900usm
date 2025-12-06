@@ -4642,7 +4642,6 @@ static int cfg80211_rtw_set_txpower(struct wiphy *wiphy,
 
 static int cfg80211_rtw_get_txpower(struct wiphy *wiphy,
                                    struct wireless_dev *wdev,
-                                   unsigned int some_val,
                                    int *dbm)
 {
     RTW_INFO("%s\n", __func__);

@@ -1,67 +1,81 @@
 <div align="center">
   
-# totolink ax900 x900usm linux driver
+# Totolink ax900 x900usm linux driver
   
-[install](#install) | [troubleshooting](#troubleshooting) | [uninstallation](#uninstallation)
+[Install](#install) | [Troubleshooting](#troubleshooting) | [Uninstall](#uninstall)
 
 ![TOTOLINK](https://github.com/user-attachments/assets/81cd186a-665d-4513-8330-98189fd4655a)
 
 </div>
 
-> [!NOTE]  
-> support ubuntu 24.04 (linux kernel 6.14)
+> Tested on CachyOS with kernel 6.12.59-2-cachyos-lts
+>
+> Upstream driver support ubuntu 24.04 (linux kernel 6.14)
 
-## install
+## Install
 
-1. install dependencies
+### Automated Installation
 
-```bash
-sudo apt update
-sudo apt install git dkms build-essential linux-headers-$(uname -r)
-```
-
-2. clone src
-
-```
-git clone https://github.com/tuanlda78202/totolink-ax900-x900usm.git
-cd totolink-ax900-x900usm 
-```
-
-3. add dkms module
+Run the provided script:
 
 ```bash
-sudo dkms add . 
-cd /usr/src/rtl8851bu-0.2
+./install.sh
 ```
 
-4. build and install
+This will handle dependencies and installation automatically.
+
+### Manual Installation
+
+If you prefer manual steps:
+
+#### 1. Install Dependencies
 
 ```bash
+sudo pacman -S git dkms base-devel linux-headers bc usb_modeswitch
+```
+
+> `linux-headers` package name may vary based on your kernel. The main idea is to install the headers that match your current kernel version.
+
+#### 2. Clone the Repository
+
+```bash
+git clone https://github.com/Keithsel/totolink-ax900-x900usm.git
+cd totolink-ax900-x900usm
+```
+
+#### 3. Build and Install the Module
+
+```bash
+sudo dkms add .
 sudo dkms build rtl8851bu/0.2
 sudo dkms install rtl8851bu/0.2
+```
+
+#### 4. Handle USB Mode Switch
+
+The adapter may initially appear as a USB storage device (ID `0bda:1a2b`). To switch to Wi-Fi mode:
+
+- Unplug and replug the USB adapter.
+- Alternatively, use `usb_modeswitch` if needed (device should auto-switch to ID `0bda:b831`).
+
+#### 5. Load the Module
+
+```bash
 sudo modprobe 8851bu
 ```
 
-5. auto-loading at boot
+#### 6. Enable Auto-Loading at Boot
 
 ```bash
 echo "8851bu" | sudo tee /etc/modules-load.d/8851bu.conf
 ```
 
-6. verify installation
+#### 7. Verify Installation
 
-```bash
-ip a
-lsmod | grep 8851bu
-```
+- Check interfaces: `ip a` or `iw dev` (look for `wlanX` with correct MAC).
+- Connect to your wifi with the adapter.
 
-7. reboot
-
-```bash
-sudo reboot
-```
-
-## troubleshooting
+## Troubleshooting
 
 ```bash
 lsusb
@@ -69,7 +83,7 @@ lspci | grep -i network
 ls /sys/class/net/
 ```
 
-## uninstallation
+## Uninstall
 
 ```bash
 sudo modprobe -r 8851bu
@@ -78,6 +92,7 @@ sudo rm -f /etc/modules-load.d/8851bu.conf
 sudo rm -rf /usr/src/rtl8851bu-0.2
 ```
 
-## ref
+## References
 
-* [heesn/rtl8831](https://github.com/heesn/rtl8831)
+- [heesn/rtl8831](https://github.com/heesn/rtl8831)
+- [tuanlda78202/totolink-ax900-x900usm](https://github.com/tuanlda78202/totolink-ax900-x900usm)
