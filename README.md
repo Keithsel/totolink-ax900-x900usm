@@ -8,7 +8,7 @@
 
 </div>
 
-> Tested on CachyOS with kernel 6.12.59-2-cachyos-lts
+> Tested on CachyOS with kernel 6.18.13-2-cachyos-lts
 >
 > Upstream driver support ubuntu 24.04 (linux kernel 6.14)
 

@@ -37,7 +37,7 @@ EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and lat
 endif
 
 src := $(dir $(lastword $(MAKEFILE_LIST)))
-EXTRA_CFLAGS += -I/usr/src/rtl8851bu-0.2/include
+EXTRA_CFLAGS += -I$(KBUILD_EXTMOD)/include
 
 EXTRA_LDFLAGS += --strip-debug
 
@@ -922,3 +922,7 @@ $(foreach flag,$(subst -I,,$(_INC_CFLAGS)),\
 )
 EXTRA_CFLAGS := $(_EXTRA_CFLAGS) $(_INC_CFLAGS)
 endif
+
+# Kernel 5.0+ uses ccflags-y instead of EXTRA_CFLAGS
+ccflags-y += $(EXTRA_CFLAGS)
+ldflags-y += $(EXTRA_LDFLAGS)
