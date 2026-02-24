@@ -24,6 +24,9 @@ Run the provided script:
 
 This will handle dependencies and installation automatically.
 
+> [!NOTE]
+> The script only supports Arch-based distributions. For other distros, please follow the manual installation steps below.
+
 ### Manual Installation
 
 If you prefer manual steps:
