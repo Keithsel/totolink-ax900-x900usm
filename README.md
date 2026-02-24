@@ -29,14 +29,13 @@ This will handle dependencies and installation automatically.
 
 ### Manual Installation
 
-If you prefer manual steps:
-
 #### 1. Install Dependencies
 
 ```bash
 sudo pacman -S git dkms base-devel linux-headers bc usb_modeswitch
 ```
 
+> [!NOTE]
 > `linux-headers` package name may vary based on your kernel. The main idea is to install the headers that match your current kernel version.
 
 #### 2. Clone the Repository
@@ -75,7 +74,7 @@ echo "8851bu" | sudo tee /etc/modules-load.d/8851bu.conf
 
 #### 7. Verify Installation
 
-- Check interfaces: `ip a` or `iw dev` (look for `wlanX` with correct MAC).
+- Check interfaces: `ip a` or `iw dev` (look for `wlanX` or `wlpXsY` with correct MAC).
 - Connect to your wifi with the adapter.
 
 ## Troubleshooting
