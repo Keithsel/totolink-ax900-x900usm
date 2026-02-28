@@ -27,13 +27,13 @@
 #endif
 
 
-#ifndef DBG_MEM_ALLOC
+/*#ifndef DBG_MEM_ALLOC
 #define DBG_MEM_ALLOC
 
 #define DBG_PHL_MEM_ALLOC
 #define DBG_HAL_MAC_MEM_MOINTOR
 #define DBG_HAL_MEM_MOINTOR
-#endif
+#endif*/
 /*#define CONFIG_PHL_USE_KMEM_ALLOC*/
 
 /*
